@@ -18,10 +18,13 @@
       submitTodoItem() {
         this.$emit('submitTodoItem', this.inputText);
         this.clearInput();
-        this.$refs.searchText.focus();
+        this.autofocus();
       },
       clearInput() {
         this.inputText = '';
+      },
+      autofocus() {
+        this.$refs.searchText.focus();
       }
     }
   }

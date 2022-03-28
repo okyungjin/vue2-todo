@@ -1,9 +1,9 @@
 <template>
   <div>
     <TodoListItem
-            v-for="todo in todoList"
+            v-for="(todo, idx) in todoList"
             :title="todo"
-            :key="todo"
+            :key="todo + idx"
             @removeTodoItem="removeTodoItem"
     ></TodoListItem>
   </div>

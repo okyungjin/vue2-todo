@@ -1,10 +1,10 @@
 <template>
-  <ul>
-    <li v-for="(todo, idx) in todoList" :key="todo+idx">
+  <transition-group name="list" tag="ul">
+    <li class="shadow" v-for="(todo, idx) in todoList" :key="todo+idx">
       <span :class="{textCompleted: todo.done}" @click="toggleTodoItem(idx)">{{ todo.label }}</span>
-      <button class="removeBtn" @click="removeTodoItem(idx)">Delete</button>
+      <span class="removeBtn" @click="removeTodoItem(idx)">Remove</span>
     </li>
-  </ul>
+  </transition-group>
 </template>
 
 <script>
@@ -12,11 +12,6 @@
     name: "TodoList",
     props: {
       todoList: Array,
-    },
-    computed: {
-      isTodoDone(isDone) {
-        return {'is-done': isDone};
-      }
     },
     methods: {
       removeTodoItem(targetIdx) {
@@ -46,14 +41,6 @@
     background: white;
     border-radius: 5px;
   }
-  .checkBtn {
-    line-height: 45px;
-    color: #62acde;
-    margin-right: 5px;
-  }
-  .checkBtnCompleted {
-    color: #b3adad;
-  }
   .textCompleted {
     text-decoration: line-through;
     color: #b3adad;
@@ -62,9 +49,10 @@
     margin-left: auto;
     color: #de4343;
   }
+
   /* transition css */
   .list-enter-active, .list-leave-active {
-    transition: all 1s;
+    transition: all 0.8s;
   }
   .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
     opacity: 0;

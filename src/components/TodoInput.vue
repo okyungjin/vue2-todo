@@ -17,6 +17,10 @@
     methods: {
       submitTodoItem() {
         this.$emit('submitTodoItem', this.inputText);
+        this.clearInput();
+      },
+      clearInput() {
+        this.inputText = '';
       }
     }
   }

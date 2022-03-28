@@ -6,4 +6,8 @@ export default class LocalStorage {
   static update(items) {
     return localStorage.setItem('todoItems', JSON.stringify(items))
   }
+
+  static clear() {
+    localStorage.clear();
+  }
 }

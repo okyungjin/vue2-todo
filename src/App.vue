@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader label="TODO it!"></TodoHeader>
     <TodoInput @submitTodoItem="addTodoItem"></TodoInput>
-    <TodoList :todo-list="todoItems" @removeTodoItem="removeTodoItem"></TodoList>
+    <TodoList :todo-list="todoItems" @removeTodoItem="removeTodoItem" @toggleTodoItem="toggleTodoItem"></TodoList>
     <TodoFooter @clear="clearTodoItems"></TodoFooter>
     <Modal v-if="showModal" @close="closeModal">
       <h3 slot="header">경고</h3>
@@ -40,13 +40,17 @@ export default {
     addTodoItem(newTodoItem) {
       if (newTodoItem === '') {
         this.openModal();
-      } else {
-        this.todoItems.push(newTodoItem);
-        LocalStorage.update(this.todoItems);
+        return;
       }
+      this.todoItems.push({done: false, label: newTodoItem});
+      LocalStorage.update(this.todoItems);
     },
-    removeTodoItem(targetTodoItem) {
-      this.todoItems = this.todoItems.filter(todo => todo !== targetTodoItem);
+    toggleTodoItem(idx) {
+      this.todoItems[idx].done = !this.todoItems[idx].done;
+      LocalStorage.update(this.todoItems);
+    },
+    removeTodoItem(targetIdx) {
+      this.todoItems.splice(targetIdx, 1);
       LocalStorage.update(this.todoItems);
     },
     clearTodoItems() {

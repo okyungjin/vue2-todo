@@ -16,6 +16,7 @@
 
 <script>
   import Modal from './common/Modal';
+  import { mapMutations } from 'vuex';
 
   export default {
     name: "TodoInput",
@@ -26,13 +27,14 @@
       }
     },
     methods: {
-      submitTodoItem() {
+      ...mapMutations(['addTodoItem']),
+       submitTodoItem() {
         if (this.inputText === '') {
           this.openModal();
           return;
         }
         const trimmed = this.inputText.trim();
-        this.$store.commit('addTodoItem', trimmed);
+        this.addTodoItem(trimmed);
         this.clearInput();
         this.autofocus();
       },

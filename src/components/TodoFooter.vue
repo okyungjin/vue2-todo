@@ -1,16 +1,16 @@
 <template>
   <div class="clearAllContainer">
-    <span class="clearAllBtn" @click="clear">Clear All</span>
+    <span class="clearAllBtn" @click="clearTodoItems">Clear All</span>
   </div>
 </template>
 
 <script>
+  import { mapMutations } from 'vuex';
+
   export default {
     name: 'TodoFooter',
     methods: {
-      clear() {
-        this.$store.commit('clearTodoItems');
-      }
+      ...mapMutations(['clearTodoItems'])
     }
   };
 </script>

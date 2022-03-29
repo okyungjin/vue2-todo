@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import { mapState, mapGetters } from 'vuex';
+  import { mapState, mapGetters, mapMutations } from 'vuex';
 
   export default {
     name: "TodoList",
@@ -17,12 +17,7 @@
       ...mapGetters(['storedTodoItems'])
     },
     methods: {
-      toggleTodoItem(idx) {
-        this.$store.commit('toggleTodoItem', idx);
-      },
-      removeTodoItem(idx) {
-        this.$store.commit('removeTodoItem', idx);
-      }
+      ...mapMutations(['toggleTodoItem', 'removeTodoItem'])
     }
   }
 </script>

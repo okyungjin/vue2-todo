@@ -1,6 +1,6 @@
 <template>
   <transition-group name="list" tag="ul">
-    <li class="shadow" v-for="(todo, idx) in this.todoItems" :key="todo+idx">
+    <li class="shadow" v-for="(todo, idx) in this.storedTodoItems" :key="todo+idx">
       <span :class="{textCompleted: todo.done}" @click="toggleTodoItem(idx)">{{ todo.label }}</span>
       <span class="removeBtn" @click="removeTodoItem(idx)">Remove</span>
     </li>
@@ -8,12 +8,13 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex';
+  import { mapState, mapGetters } from 'vuex';
 
   export default {
     name: "TodoList",
     computed: {
-      ...mapState(['todoItems'])
+      ...mapState(['todoItems']),
+      ...mapGetters(['storedTodoItems'])
     },
     methods: {
       toggleTodoItem(idx) {

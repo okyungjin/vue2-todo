@@ -5,8 +5,10 @@
 <script>
   export default {
     name: "TodoHeader",
-    props: {
-      label: String
+    data() {
+      return {
+        label: 'TODO it!',
+      }
     }
   }
 </script>

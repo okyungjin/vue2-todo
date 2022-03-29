@@ -8,13 +8,22 @@ export const store = new Vuex.Store({
   state: {
     todoItems: LocalStorage.fetch(),
   },
-  getters: {
-    getNumber(state) {
-      return state.num;
+  mutations: {
+    addTodoItem(state, newTodoItem) {
+      state.todoItems.push({done: false, label: newTodoItem});
+      LocalStorage.update(state.todoItems);
     },
-    getDoubleNumber(state) {
-      return state.num * 2;
+    toggleTodoItem(state, targetIdx) {
+      state.todoItems[targetIdx].done = !state.todoItems[targetIdx].done;
+      LocalStorage.update(this.state.todoItems);
+    },
+    removeTodoItem(state,targetIdx) {
+      state.todoItems.splice(targetIdx, 1);
+      LocalStorage.update(state.todoItems);
+    },
+    clearTodoItems(state) {
+      LocalStorage.clear();
+      state.todoItems = [];
     }
   }
-
 });

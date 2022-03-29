@@ -2,20 +2,37 @@
   <div class="inputBox shadow">
     <input type="text" id="searchText" ref="searchText" v-model="inputText" @keyup.enter="submitTodoItem">
     <span class="addContainer" type="submit" @click="submitTodoItem">Add</span>
+    <Modal v-if="showModal" @close="closeModal">
+      <h3 slot="header">경고</h3>
+      <div slot="body">내용이 비어있습니다.</div>
+      <div slot="footer">
+        <button class="modal-default-button" @click="closeModal">
+          Close
+        </button>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script>
+  import Modal from './common/Modal';
+
   export default {
     name: "TodoInput",
     data() {
       return {
         inputText: '',
+        showModal: false,
       }
     },
     methods: {
       submitTodoItem() {
-        this.$emit('submitTodoItem', this.inputText);
+        if (this.inputText === '') {
+          this.openModal();
+          return;
+        }
+        const trimmed = this.inputText.trim();
+        this.$store.commit('addTodoItem', trimmed);
         this.clearInput();
         this.autofocus();
       },
@@ -24,7 +41,16 @@
       },
       autofocus() {
         this.$refs.searchText.focus();
-      }
+      },
+      openModal() {
+        this.showModal = true;
+      },
+      closeModal() {
+        this.showModal = false;
+      },
+    },
+    components: {
+      Modal,
     }
   }
 </script>

@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader label="TODO it!"></TodoHeader>
     <TodoInput @submitTodoItem="addTodoItem"></TodoInput>
-    <TodoList :todo-list="todoItems" @removeTodoItem="removeTodoItem" @toggleTodoItem="toggleTodoItem"></TodoList>
+    <TodoList :todo-list="this.$store.state.todoItems" @removeTodoItem="removeTodoItem" @toggleTodoItem="toggleTodoItem"></TodoList>
     <TodoFooter @clear="clearTodoItems"></TodoFooter>
     <Modal v-if="showModal" @close="closeModal">
       <h3 slot="header">경고</h3>

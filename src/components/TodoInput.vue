@@ -1,7 +1,7 @@
 <template>
   <div class="inputBox shadow">
     <input type="text" id="searchText" ref="searchText" v-model="inputText" @keyup.enter="submitTodoItem">
-    <span class="addContainer" type="submit" @click="submitTodoItem">Add</span>
+    <span class="addContainer" @click="submitTodoItem">Add</span>
     <Modal v-if="showModal" @close="closeModal">
       <h3 slot="header">경고</h3>
       <div slot="body">내용이 비어있습니다.</div>
